@@ -16,6 +16,11 @@ export default function App() {
   const [form, setForm] = useState({ date: "", title: "", owner: "geovane" });
   const [currentDate, setCurrentDate] = useState(new Date());
 
+  function isPast(dateStr) {
+  const today = new Date().toISOString().slice(0, 10);
+  return dateStr < today;
+}
+  
   useEffect(() => {
     const q = query(collection(db, "events"), orderBy("date"));
     const unsub = onSnapshot(q, (snap) => {
