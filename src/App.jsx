@@ -96,21 +96,32 @@ export default function App() {
             {dayNames.map((d) => <div key={d}>{d}</div>)}
           </div>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 1fr)", gap: 4 }}>
-            {days.map((date, i) => {
-              const dateStr = date ? date.toISOString().slice(0, 10) : null;
-              return (
-                <div key={i} style={{ minHeight: 60, border: "1px solid #ddd", padding: 4 }}>
-                  {date && <strong>{date.getDate()}</strong>}
-                  <div>
-                    {dateStr && groupedEvents[dateStr]?.map((ev) => (
-                      <div key={ev.id} style={{ backgroundColor: getColor(ev.owner), padding: 2, borderRadius: 4, marginTop: 2, textDecoration: isPast(ev.date) ? "line-through" : "none", fontSize: 12 }}>
-                        {ev.title}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              );
-            })}
+           {days.map((date, i) => {
+  const dateStr = date ? date.toISOString().slice(0, 10) : null;
+  const dayOfWeek = date ? date.getDay() : null;
+  const backgroundColor = (dayOfWeek === 0 || dayOfWeek === 6) ? "#f5f5f5" : "white";
+
+  return (
+    <div
+      key={i}
+      style={{
+        minHeight: 60,
+        border: "1px solid #ddd",
+        padding: 4,
+        backgroundColor,
+      }}
+    >
+      {date && <strong>{date.getDate()}</strong>}
+      <div>
+        {dateStr && groupedEvents[dateStr]?.map((ev) => (
+          <div key={ev.id} style={{ backgroundColor: getColor(ev.owner), padding: 2, borderRadius: 4, marginTop: 2, fontSize: 12 }}>
+            {ev.title}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+})}
           </div>
         </div>
         <div style={{ flex: 1, padding: 16, overflowY: "auto" }}>
