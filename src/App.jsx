@@ -103,7 +103,7 @@ export default function App() {
                   {date && <strong>{date.getDate()}</strong>}
                   <div>
                     {dateStr && groupedEvents[dateStr]?.map((ev) => (
-                      <div key={ev.id} style={{ backgroundColor: getColor(ev.owner), padding: 2, borderRadius: 4, marginTop: 2, fontSize: 12 }}>
+                      <div key={ev.id} style={{ backgroundColor: getColor(ev.owner), padding: 2, borderRadius: 4, marginTop: 2, textDecoration: isPast(ev.date) ? "line-through" : "none", fontSize: 12 }}>
                         {ev.title}
                       </div>
                     ))}
@@ -119,7 +119,9 @@ export default function App() {
           <ul style={{ listStyle: "none", padding: 0 }}>
             {events.map((ev) => (
               <li key={ev.id} style={{ backgroundColor: getColor(ev.owner), marginBottom: 8, padding: 6, borderRadius: 4, display: "flex", justifyContent: "space-between" }}>
-                <span><strong>{ev.date}:</strong> {ev.title} <small>({ev.owner})</small></span>
+                <span style={{ textDecoration: isPast(ev.date) ? "line-through" : "none" }}>
+  <strong>{ev.date}:</strong> {ev.title} <small>({ev.owner})</small></span>
+
                 <button onClick={() => removeEvent(ev.id)} style={{ backgroundColor: "transparent", border: "none", color: "red", fontWeight: "bold", cursor: "pointer", fontSize: 18 }} title="Excluir evento">×</button>
               </li>
             ))}
