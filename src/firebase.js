@@ -1,4 +1,5 @@
 // src/firebase.js
+
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
@@ -7,13 +8,14 @@ const firebaseConfig = {
   authDomain: "agenda-ggmw.firebaseapp.com",
   databaseURL: "https://agenda-ggmw-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "agenda-ggmw",
-  storageBucket: "agenda-ggmw.firebasestorage.app",
+  storageBucket: "agenda-ggmw.appspot.com",
   messagingSenderId: "411608997404",
   appId: "1:411608997404:web:94bfcfea00cdd1d1e909d9",
   measurementId: "G-NTZNKKWQYJ"
 };
 
+// Inicializa o app Firebase
 const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
-export default db;
+// Exporta o Firestore
+export const db = getFirestore(app);
